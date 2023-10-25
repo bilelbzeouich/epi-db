@@ -1,131 +1,40 @@
-# epi-db
-create table client(
-idCL char(7) primary key,
-NomCL char(7) NOT NULL, 
-PrenomCL char(7), 
-AdrCL char(7) NOT NULL, 
-Email char(7) UNIQUE check(Email LIKE '%@%') NOT NULL
-);
-create table produit(
-CodP char(8) primary key,
-Lib char(8) NOT NULL, 
-PU number(7),
-QteS number(7) CHECK (QteS>0), 
-StkMin number(7) CHECK (StkMin between 10 and 50)
-);
-
-create table commande(
-Numc number(4) primary key, 
-DateC date , 
-MontantC number(7),
-IDpan number(5),
-Foreign key (IDpan)  REFERENCES Panier(IDpan)  
-
-);
-
-create table panier(
-IDpan number(5) primary key, 
-idCL char(7)  ,
-Foreign key (idCL)  REFERENCES client(idCL) 
-);
-
- create table LignePanier(
- IdLigPAn number(5) primary key, 
- CodP char(8),
- Qte number(7) CHECK(Qte>0),
- IDpan number(5),
- Foreign key (IDpan) REFERENCES Panier(IDpan),
- Foreign key (CodP) REFERENCES produit(CodP)
- ); 
- 
- create table paiement(
- NumP number(5) primary key, 
- dateP date , 
- etat char(10) CHECK(etat IN('validé','Annuler')), 
- IDcarte number(7)  , 
- Numc number(4),
-  Foreign key (IDcarte) REFERENCES carte(IDcarte),
-   Foreign key (Numc) REFERENCES commande(Numc) 
- 
- ); 
- 
- create table carte(
-IDcarte number(7) primary key, 
-typeC varchar(20), 
-dateExp date
- );
- 
- DROP table CARTES; 
- 
-  ALTER TABLE CLIENT
-  add(
-  login char(5), 
-  Password char(20)
-  );
-  
-  ALTER TABLE Produit  MODIFY(Lib varchar(25));
-  
-  ALTER TABLE client MODIFY(
-NomCL varchar(25) ,  
-PrenomCL varchar(25) ,
-AdrCL  varchar(25) ,
-login  varchar(25) ,
-Email varchar(25) ,
-Password check(length(Password)>=10)
-  );
-  
-  alter table Produit add(
-  constraint ck_Qtes check(QteS>=StkMin)
-  );
-  
-    alter table Client add(
-  constraint cemailoblig check(Email is not null)
-  );
-  
-    alter table Client add(
-  constraint cmpassloblig check(Password is not null and length(Password)>=10)
-  );
-  
-  insert into Produit (CodP,Lib,PU,QteS,StkMin)
-  values(100,'robe',200,50,23);
-  
-    insert into Produit (CodP,Lib,PU,QteS,StkMin)
-  values(101,'jupe40',150,200,25);
-  
-    insert into Produit (CodP,Lib,PU,QteS,StkMin)
-  values(102,'costume33',400,1000,10);
-  
-    insert into Produit (CodP,Lib,PU,QteS,StkMin)
-  values(103,'pull02',100,500,42);
-  
-    insert into Produit (CodP,Lib,PU,QteS,StkMin)
-  values(100,'PArfum YSL',785,150,20);
-  
-  
-    insert into client (idCL,NomCL,PrenomCL,AdrCL,Email,login,Password)
-  values(789,'Sami','bensalah','sousse','sami@yahoo.com','SAmibensalah01','SBS01sbssss');
-  
-    insert into client (idCL,NomCL,PrenomCL,AdrCL,Email,login,Password)
-  values(790,'Ali','benmoahemd','kairouan','ali@gmail.fr','alibenmed02','ABM02abm');
-  
-    insert into client (idCL,NomCL,PrenomCL,AdrCL,Email,login,Password)
-  values(791,'Moez','Mohamed','Tunis','moez@gmail.com','Moezmed03','MM03mm');
-  
-    insert into client (idCL,NomCL,PrenomCL,AdrCL,Email,login,Password)
-  values(792,'rami','benmahmoud','sousse','rami@gmail.com','Ramibenmah04','RBM04rbm');
-  
-    insert into client (idCL,NomCL,PrenomCL,AdrCL,Email,login,Password)
-  values(793,'Hana','benYoussef','djerba','hana@outlook.fr','HAnaYSf05','HBY05hby');
-  
-     insert into client (idCL,NomCL,PrenomCL,AdrCL,Email,login,Password)
-  values(794,'Malak','Mestiri','Monastir','malak@hotmail.fr','MAlakHM06','MMMo06mmO');
-  
-  delete from client where NomCL='Sami';
-  
-  UPDATE Client set AdrCL='Nabeul'
-  where idCL=790;
-
-  
-  UPDATE Produit SET PU=250
-  WHERE PU=200;
-****
+ -- Partie 4
+-- 1
+select * from client where nomcl like 'A%' and adrcl='tunis';
+-- 2
+select * from produit where pu > 300;
+-- 3
+select * from commande where datec = date'2023-10-22';
+-- 4
+select * from produit where qtes=null;
+-- 5
+select * from produit where lib like '%e';
+-- 6
+select * from categorie 
+where substr(libcategorie, 3, 1) = 'a' and libcategorie like '%s';
+-- 7
+select * from client order by nomcl asc;
+-- 8
+select * from produit order by pu desc;
+-- 9
+select * from commande order by datec asc;
+-- 10
+select * from commande order by montantc desc;
+-- 11
+select count(*) from client;
+-- 12
+select avg(pu) from produit;
+-- 13
+select * from produit where pu > (select avg(pu) from produit);
+-- 14
+select sum(montantc) from commande;
+-- 15
+select avg(montantc) from commande;
+-- 16
+select count(*) from produit where qtes > 0;
+-- 17
+select * from produit where pu = (select min(pu) from produit);
+-- 19
+select stkmin from produit;
+-- 20 
+select * from produit where pu = (select max(pu) from produit);
