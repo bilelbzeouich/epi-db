@@ -8,4 +8,8 @@ select LAST_NAME,FIRST_NAME,DEPARTMENT_ID,JOB_ID,HIRE_DATE from hr.employees whe
 --4
 select LAST_NAME ||' '|| FIRST_NAME as fullname from hr.employees where MANAGER_ID is null; 
 --5 
-select LAST_NAME from hr.employees where ((HIRE_DATE >date'2007-02-17') and (HIRE_DATE<date'2007-10-30'));
+select LAST_NAME from hr.employees where ((HIRE_DATE >date'2007-02-17') and (HIRE_DATE<date'2007-10-30')); 
+/*2ème méthode*/
+select LAST_NAME from hr.employees where (HIRE_DATE between date'2007-02-17'and date'2007-10-30');
+--6 
+select LAST_NAME from hr.employees where (LAST_NAME='j%') ; 
