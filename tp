@@ -1,5 +1,6 @@
 select * from hr.employees ; 
 select * from hr.DEPARTMENTS ; 
+						/******PARTIE 1******/
 --1
 select LAST_NAME , FIRST_NAME  from hr.employees where SALARY>10000 ; 
 --2 
@@ -28,3 +29,9 @@ select LAST_NAME ,NVL(to_char(COMMISSION_PCT),'pas de commission')as commission 
 select LAST_NAME ||'.'|| SUBSTR(FIRST_NAME,1,1) as fullname from hr.employees ;
 --13
 select UPPER(LAST_NAME) ||' '|| UPPER(FIRST_NAME) as fullname from hr.employees ;
+						/******PARTIE 2******/
+select * from hr.countries ;
+select e.last_name emp , m.last_name mgr from hr.employees e JOIN hr.employees m on (e.manager_id = m.employee_id); 
+--1
+select c.country_name from hr.countries c join 
+
