@@ -31,7 +31,8 @@ select LAST_NAME ||'.'|| SUBSTR(FIRST_NAME,1,1) as fullname from hr.employees ;
 select UPPER(LAST_NAME) ||' '|| UPPER(FIRST_NAME) as fullname from hr.employees ;
 						/******PARTIE 2******/
 select * from hr.countries ;
+select * from hr.regions ;
 select e.last_name emp , m.last_name mgr from hr.employees e JOIN hr.employees m on (e.manager_id = m.employee_id); 
 --1
-select c.country_name from hr.countries c join 
+select c.country_name from hr.countries c join hr.regions r on (r.region_id=c.region_id and r.region_name = 'Americas');
 
