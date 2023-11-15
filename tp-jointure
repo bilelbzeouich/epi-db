@@ -35,4 +35,6 @@ select * from hr.regions ;
 select e.last_name emp , m.last_name mgr from hr.employees e JOIN hr.employees m on (e.manager_id = m.employee_id); 
 --1
 select c.country_name from hr.countries c join hr.regions r on (r.region_id=c.region_id and r.region_name = 'Americas');
+--2 
+select e.LAST_NAME ||' '|| e.FIRST_NAME ||' is a manager of the '|| d.DEPARTMENT_NAME ||' department.'  as Managers from hr.employees e   join hr.DEPARTMENTS d  on (e.employee_id=d.Manager_id); 
 
