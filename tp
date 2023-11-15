@@ -1,0 +1,11 @@
+select * from hr.employees ; 
+--1
+select LAST_NAME , FIRST_NAME  from hr.employees where SALARY>10000 ; 
+--2 
+select LAST_NAME ||' '|| FIRST_NAME as fullname from hr.employees ;
+--3 
+select LAST_NAME,FIRST_NAME,DEPARTMENT_ID,JOB_ID,HIRE_DATE from hr.employees where ((DEPARTMENT_ID=30) and (SALARY>2000)and (HIRE_DATE >date'2003-02-12') and (HIRE_DATE<date'2008-09-01'));
+--4
+select LAST_NAME ||' '|| FIRST_NAME as fullname from hr.employees where MANAGER_ID is null; 
+--5 
+select LAST_NAME from hr.employees where ((HIRE_DATE >date'2007-02-17') and (HIRE_DATE<date'2008-09-01'))
