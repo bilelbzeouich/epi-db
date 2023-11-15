@@ -37,4 +37,10 @@ select e.last_name emp , m.last_name mgr from hr.employees e JOIN hr.employees m
 select c.country_name from hr.countries c join hr.regions r on (r.region_id=c.region_id and r.region_name = 'Americas');
 --2 
 select e.LAST_NAME ||' '|| e.FIRST_NAME ||' is a manager of the '|| d.DEPARTMENT_NAME ||' department.'  as Managers from hr.employees e   join hr.DEPARTMENTS d  on (e.employee_id=d.Manager_id); 
-
+--3 
+select r.region_name,c.country_name,l.city,d.department_name,e.LAST_NAME,e.FIRST_NAME,e.SALARY from hr.employees e 
+    join hr.DEPARTMENTS d  on (e.department_id=d.department_id) 
+    join hr.locations l on (l.location_id=d.location_id)
+    join hr.countries c on (c.country_id=l.country_id)
+    join hr.regions r on (r.region_id=c.region_id)
+    where(e.salary>12000);
