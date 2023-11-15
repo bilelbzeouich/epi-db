@@ -20,3 +20,5 @@ select LAST_NAME,FIRST_NAME from hr.employees where (REGEXP_COUNT(LAST_NAME,'a')
 select LAST_NAME,FIRST_NAME from hr.employees where(MANAGER_ID=114);
 --9 
 select DEPARTMENT_NAME from hr.DEPARTMENTS where(MANAGER_ID =114 or MANAGER_ID is null);
+--10
+select * from hr.employees where(JOB_ID in('IT_PROG','SA_REP','ST_CLERK')) ;
