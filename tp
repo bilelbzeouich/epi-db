@@ -19,4 +19,4 @@ select LAST_NAME,FIRST_NAME from hr.employees where (REGEXP_COUNT(LAST_NAME,'a')
 --8 
 select LAST_NAME,FIRST_NAME from hr.employees where(MANAGER_ID=114);
 --9 
-select DEPARTMENT_NAME from hr.DEPARTMENTS where(MANAGER_ID in (114,null));
+select DEPARTMENT_NAME from hr.DEPARTMENTS where(MANAGER_ID =114 or MANAGER_ID is null);
