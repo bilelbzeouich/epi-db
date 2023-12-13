@@ -1,1 +1,2 @@
-
+--1 
+select count(*) as total_products_for_girl from co.products where PRODUCT_NAME like'Girl%';
