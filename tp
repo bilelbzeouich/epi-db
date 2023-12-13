@@ -6,3 +6,7 @@ select p.product_name, oi.quantity from co.products p
 	join co.order_items oi on oi.product_id=p.product_id 
 	join co.orders o on oi.order_id=o.order_id 
 	where o.order_id in (800,801,802);
+--3 
+SELECT product_name
+FROM co.products
+WHERE unit_price = (SELECT MIN(unit_price) FROM co.products);
