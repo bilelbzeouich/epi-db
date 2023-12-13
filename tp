@@ -1,2 +1,8 @@
 --1 
 select count(*) as total_products_for_girl from co.products where PRODUCT_NAME like'Girl%';
+
+--2 
+select p.product_name, oi.quantity from co.products p  
+	join co.order_items oi on oi.product_id=p.product_id 
+	join co.orders o on oi.order_id=o.order_id 
+	where o.order_id in (800,801,802);
