@@ -10,6 +10,12 @@ select p.product_name, oi.quantity from co.products p
 SELECT product_name
 FROM co.products
 WHERE unit_price = (SELECT MIN(unit_price) FROM co.products);
+--4 
+select c.customer_id,c.full_name,count(o.order_id)as order_count from co.customers c
+join co.orders o on c.customer_id=o.customer_id 
+    group by c.customer_id,c.full_name
+    having count(o.order_id)>10 and regexp_count(c.full_name,'t')=2 
+    ;
 
 --6
 select o.order_id,c.full_name as customer_name, p.product_name,p.unit_price,oi.quantity,s.store_name from co.products p 
@@ -19,3 +25,11 @@ join co.customers c on c.customer_id=o.customer_id
 join co.stores s on s.store_id=o.store_id 
 	where o.order_id=790;
 	
+--7 
+select c.customer_id,c.full_name,c.email_address from co.customers c 
+join co.orders o on o.customer_id=c.customer_id  
+where o.order_status like'REFUNDED'; 
+
+--8 
+select * from co.orders 
+where order_status like 'CANCELLED' and extract (year from order_datetime)=2019;
